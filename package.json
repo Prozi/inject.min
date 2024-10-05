@@ -1,0 +1,10 @@
+{
+  "name": "inject-injectable",
+  "version": "1.0.0",
+  "description": "dependency injection 2024",
+  "main": "dist/index.js",
+  "repository": "git@github.com:Prozi/inject-injectable.git",
+  "author": "Prozi <Jacek Pietal> <prozi85@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
