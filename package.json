@@ -1,7 +1,7 @@
 {
   "name": "inject.min",
-  "version": "1.0.9",
-  "description": "dependency injection in typescript '2024",
+  "version": "1.0.10",
+  "description": "lightweight typescript dependency injection in 2024",
   "keywords": [
     "typescript",
     "dependency injection",
@@ -19,7 +19,9 @@
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "git@github.com:Prozi/inject.min.git",
+  "repository": {
+    "url": "git+ssh://git@github.com/Prozi/inject.min.git"
+  },
   "author": "Prozi <Jacek Pietal> <prozi85@gmail.com>",
   "license": "MIT",
   "private": false,
