@@ -29,24 +29,24 @@ const _1 = require('.');
 class Example {
   constructor(props) {
     this.value =
-      (props === null || props === void 0 ? void 0 : props.value) || 'example';
+      (props === null || props === void 0 ? void 0 : props.param) || 'example';
   }
 }
 class Test {
   constructor() {
-    console.log(this.example1.value); // example
+    console.log(this.example.value); // example
     console.log(this.example2.value); // example2
   }
 }
 __decorate(
   [(0, _1.Inject)(Example), __metadata('design:type', Example)],
   Test.prototype,
-  'example1',
+  'example',
   void 0
 );
 __decorate(
   [
-    (0, _1.Inject)(Example, { value: 'example2' }),
+    (0, _1.Inject)(Example, { param: 'example2' }),
     __metadata('design:type', Example)
   ],
   Test.prototype,
@@ -55,24 +55,29 @@ __decorate(
 );
 class Test2 {
   constructor() {
-    console.log(this.example1.value); // example
-    console.log(this.example2.value); // example2
+    console.log(this.example.value); // example
+    console.log(this.example2.value); // different
   }
 }
 __decorate(
   [(0, _1.Inject)(Example), __metadata('design:type', Example)],
   Test2.prototype,
-  'example1',
+  'example',
   void 0
 );
 __decorate(
   [
-    (0, _1.Inject)(Example, { value: 'example2' }),
+    (0, _1.Inject)(Example, { param: 'different' }),
     __metadata('design:type', Example)
   ],
   Test2.prototype,
   'example2',
   void 0
 );
-new Test();
-new Test2();
+class Test3 extends Test {}
+const test = new Test(); // example, example2
+const test2 = new Test2(); // example, different
+const test3 = new Test3(); // example, example2
+console.log(test.example === test2.example); // true
+console.log(test.example2 === test2.example2); // false
+console.log(test.example2 === test3.example2); // true
