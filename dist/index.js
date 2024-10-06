@@ -5,7 +5,7 @@ exports.Inject = Inject;
 class DIContainer {
   static get(Class, props) {
     const className = Class.name;
-    const classPropsKey = `${className}:${JSON.stringify(props || {})}`;
+    const classPropsKey = `${className}:${JSON.stringify(props)}`;
     if (!DIContainer.instances.has(classPropsKey)) {
       DIContainer.instances.set(classPropsKey, new Class(props));
     }

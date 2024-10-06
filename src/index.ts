@@ -9,7 +9,7 @@ export class DIContainer {
 
   static get<T extends BaseObject>(Class: BaseClass<T>, props?: Partial<T>): T {
     const className = Class.name;
-    const classPropsKey = `${className}:${JSON.stringify(props || {})}`;
+    const classPropsKey = `${className}:${JSON.stringify(props)}`;
 
     if (!DIContainer.instances.has(classPropsKey)) {
       DIContainer.instances.set(classPropsKey, new Class(props));

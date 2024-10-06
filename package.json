@@ -1,6 +1,6 @@
 {
   "name": "inject.min",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "dependency injection in typescript '2024",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,9 +16,10 @@
   },
   "scripts": {
     "format": "prettier . --write",
-    "precommit": "yarn build && yarn format",
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "test": "yarn ts-node src/test.ts"
+    "test": "yarn ts-node src/test.ts",
+    "precommit": "yarn build && yarn format",
+    "amend": "yarn precommit && git commit -a --am --no-edit"
   }
 }
