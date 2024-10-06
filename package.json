@@ -1,7 +1,22 @@
 {
   "name": "inject.min",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "dependency injection in typescript '2024",
+  "keywords": [
+    "typescript",
+    "dependency injection",
+    "di",
+    "injectable",
+    "decorators",
+    "inversion of control",
+    "ioc",
+    "lightweight",
+    "zero dependency",
+    "typescript library",
+    "typescript di",
+    "mit",
+    "dependency management"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:Prozi/inject.min.git",
