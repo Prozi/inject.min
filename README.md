@@ -69,3 +69,7 @@ console.log(test.example === test2.example); // true
 console.log(test.example2 === test2.example2); // false
 console.log(test.example2 === test3.example2); // true
 ```
+
+### license
+
+MIT
