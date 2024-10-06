@@ -7,18 +7,15 @@ export type BaseClass<T = BaseObject> = new (...args: any[]) => T;
 export class DIContainer {
   protected static instances = new Map<string, unknown>();
 
-  static get<T extends BaseObject>(
-    Class: BaseClass<T>,
-    props: Partial<T> = {}
-  ): T {
+  static get<T extends BaseObject>(Class: BaseClass<T>, props?: Partial<T>): T {
     const className = Class.name;
+    const classPropsKey = `${className}:${JSON.stringify(props || {})}`;
 
-    const propsKey = `${className}:${JSON.stringify(props)}`;
-    if (!DIContainer.instances.has(propsKey)) {
-      DIContainer.instances.set(propsKey, new Class(props));
+    if (!DIContainer.instances.has(classPropsKey)) {
+      DIContainer.instances.set(classPropsKey, new Class(props));
     }
 
-    return DIContainer.instances.get(propsKey) as T;
+    return DIContainer.instances.get(classPropsKey) as T;
   }
 }
 

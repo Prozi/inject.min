@@ -1,6 +1,6 @@
 {
   "name": "inject.min",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "dependency injection in typescript '2024",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

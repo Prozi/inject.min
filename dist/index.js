@@ -3,13 +3,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
 exports.DIContainer = void 0;
 exports.Inject = Inject;
 class DIContainer {
-  static get(Class, props = {}) {
+  static get(Class, props) {
     const className = Class.name;
-    const propsKey = `${className}:${JSON.stringify(props)}`;
-    if (!DIContainer.instances.has(propsKey)) {
-      DIContainer.instances.set(propsKey, new Class(props));
+    const classPropsKey = `${className}:${JSON.stringify(props || {})}`;
+    if (!DIContainer.instances.has(classPropsKey)) {
+      DIContainer.instances.set(classPropsKey, new Class(props));
     }
-    return DIContainer.instances.get(propsKey);
+    return DIContainer.instances.get(classPropsKey);
   }
 }
 exports.DIContainer = DIContainer;
