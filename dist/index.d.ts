@@ -4,14 +4,12 @@ export type BaseObject = {
   };
 };
 export type BaseClass<T = BaseObject> = new (...args: any[]) => T;
+export type Props = Record<string, any>;
 export declare class DIContainer {
   protected static instances: Map<string, unknown>;
-  static get<T extends BaseObject>(
-    Class: BaseClass<T>,
-    props?: Record<string, any>
-  ): T;
+  static get<T extends BaseObject>(Class: BaseClass<T>, props?: Props): T;
 }
 export declare function Inject<T extends BaseObject>(
-  inner: BaseClass<T>,
-  props?: Record<string, any>
-): (outer: Record<string, any>, field: string) => void;
+  Class: BaseClass<T>,
+  props?: Props
+): (parent: Props, prop: string) => void;

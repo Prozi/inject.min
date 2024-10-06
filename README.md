@@ -6,6 +6,16 @@
 npm i inject.min --save
 ```
 
+modify your `tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true
+  }
+}
+```
+
 ### example
 
 ```ts
