@@ -1,10 +1,22 @@
 {
-  "name": "inject-injectable",
+  "name": "inject.min",
   "version": "1.0.0",
-  "description": "dependency injection 2024",
+  "description": "dependency injection in typescript '2024",
   "main": "dist/index.js",
-  "repository": "git@github.com:Prozi/inject-injectable.git",
+  "repository": "git@github.com:Prozi/inject.ts.git",
   "author": "Prozi <Jacek Pietal> <prozi85@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  },
+  "scripts": {
+    "format": "prettier . --write",
+    "precommit": "yarn build && yarn format",
+    "build": "tsc",
+    "test": "yarn ts-node src/test.ts"
+  }
 }
