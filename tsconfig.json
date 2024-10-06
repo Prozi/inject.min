@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
-    /* Modules */
-    "module": "commonjs" /* Specify what module code is generated. */,
-    /* Emit */
+    "target": "es2016" /* Modules */,
+    "module": "commonjs" /* Emit */,
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "outDir": "./dist" /* Specify an output folder for all emitted files. */,
+    "rootDir": "./src",
+    "outDir": "./dist",
     /* Interop Constraints */
-    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
-    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     /* Type Checking */
-    "strict": true /* Enable all strict type-checking options. */,
+    "strict": true,
     /* Completeness */
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true
   }
 }

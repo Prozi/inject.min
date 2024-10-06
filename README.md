@@ -1,5 +1,11 @@
+```bash
+npm i inject.min --save
+```
+
+---
+
 ```ts
-import { Inject } from 'inject.ts';
+import { Inject } from 'inject.min';
 
 class Example {
   value: string;
