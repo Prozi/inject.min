@@ -32,10 +32,16 @@ class Example {
       (props === null || props === void 0 ? void 0 : props.param) || 'example';
   }
 }
+class Example2 extends Example {
+  constructor(param) {
+    super({ param });
+  }
+}
 class Test {
   constructor() {
     console.log(this.example.value); // example
     console.log(this.example2.value); // example2
+    console.log(this.example3.value); // example3
   }
 }
 __decorate(
@@ -45,18 +51,25 @@ __decorate(
   void 0
 );
 __decorate(
+  [(0, _1.Inject)(Example2, 'example2'), __metadata('design:type', Example2)],
+  Test.prototype,
+  'example2',
+  void 0
+);
+__decorate(
   [
-    (0, _1.Inject)(Example, { param: 'example2' }),
+    (0, _1.Inject)(Example, { param: 'example3' }),
     __metadata('design:type', Example)
   ],
   Test.prototype,
-  'example2',
+  'example3',
   void 0
 );
 class Test2 {
   constructor() {
     console.log(this.example.value); // example
     console.log(this.example2.value); // different
+    console.log(this.example3.value); // example3
   }
 }
 __decorate(
@@ -66,18 +79,24 @@ __decorate(
   void 0
 );
 __decorate(
-  [
-    (0, _1.Inject)(Example, { param: 'different' }),
-    __metadata('design:type', Example)
-  ],
+  [(0, _1.Inject)(Example2, 'different'), __metadata('design:type', Example2)],
   Test2.prototype,
   'example2',
   void 0
 );
+__decorate(
+  [
+    (0, _1.Inject)(Example, { param: 'example3' }),
+    __metadata('design:type', Example)
+  ],
+  Test2.prototype,
+  'example3',
+  void 0
+);
 class Test3 extends Test {}
-const test = new Test(); // example, example2
-const test2 = new Test2(); // example, different
-const test3 = new Test3(); // example, example2
+const test = new Test(); // example, example2, example3
+const test2 = new Test2(); // example, different, example3
+const test3 = new Test3(); // example, example2, example3
 console.log(test.example === test2.example); // true
 console.log(test.example2 === test2.example2); // false
 console.log(test.example2 === test3.example2); // true

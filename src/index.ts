@@ -4,12 +4,10 @@ export type BaseObject = {
 
 export type BaseClass<T = BaseObject> = new (...args: any[]) => T;
 
-export type Props = Record<string, any>;
-
 export class DIContainer {
   protected static instances = new Map<string, unknown>();
 
-  static get<T extends BaseObject>(Class: BaseClass<T>, props?: Props): T {
+  static get<T extends BaseObject>(Class: BaseClass<T>, props?: any): T {
     const className = Class.name;
     const classPropsKey = `${className}:${JSON.stringify(props)}`;
 
@@ -21,11 +19,8 @@ export class DIContainer {
   }
 }
 
-export function Inject<T extends BaseObject>(
-  Class: BaseClass<T>,
-  props?: Props
-) {
-  return function (parent: Props, prop: string) {
+export function Inject<T extends BaseObject>(Class: BaseClass<T>, props?: any) {
+  return function (parent: Record<string, any>, prop: string) {
     const instance = DIContainer.get(Class, props);
 
     parent[prop] = instance;
