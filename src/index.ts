@@ -8,14 +8,28 @@ export class DIContainer {
   protected static instances = new Map<string, unknown>();
 
   static get<T extends BaseObject>(Class: BaseClass<T>, props?: any): T {
-    const className = Class.name;
-    const classPropsKey = `${className}(${typeof props}:${JSON.stringify(props)})`;
+    const classPropsKey = DIContainer.createKey(Class, props);
 
     if (!DIContainer.instances.has(classPropsKey)) {
       DIContainer.instances.set(classPropsKey, new Class(props));
     }
 
     return DIContainer.instances.get(classPropsKey) as T;
+  }
+
+  protected static createKey<T extends BaseObject>(
+    Class: BaseClass<T>,
+    props?: any
+  ): string {
+    return `${Class.name}(${typeof props}:${DIContainer.tryStringify(props)})`;
+  }
+
+  protected static tryStringify(props?: any): string {
+    try {
+      return JSON.stringify(props);
+    } catch (_err) {
+      return '{}';
+    }
   }
 }
 
