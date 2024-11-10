@@ -11,4 +11,4 @@ export declare class DIContainer {
 export declare function Inject<T extends BaseObject>(
   Class: BaseClass<T>,
   props?: any
-): (parent: Record<string, any>, prop: string) => void;
+): (parent: Record<string, any>, propertyKey: string) => void;

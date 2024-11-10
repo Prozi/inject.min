@@ -1,6 +1,6 @@
 {
   "name": "inject.min",
-  "version": "1.0.11",
+  "version": "1.1.0",
   "description": "lightweight typescript dependency injection in 2024",
   "keywords": [
     "typescript",
@@ -29,7 +29,7 @@
   "devDependencies": {
     "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "scripts": {
     "format": "prettier . --write",

@@ -20,9 +20,9 @@ export class DIContainer {
 }
 
 export function Inject<T extends BaseObject>(Class: BaseClass<T>, props?: any) {
-  return function (parent: Record<string, any>, prop: string) {
-    const instance = DIContainer.get(Class, props);
-
-    parent[prop] = instance;
+  return function (parent: Record<string, any>, propertyKey: string) {
+    Object.defineProperty(parent, propertyKey, {
+      get: () => DIContainer.get(Class, props)
+    });
   };
 }
