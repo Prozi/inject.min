@@ -19,7 +19,7 @@ modify your `tsconfig.json`
 ### example
 
 ```ts
-import { Inject } from 'inject.min';
+import { DIContainer, Inject } from 'inject.min';
 
 class Example {
   value: string;
@@ -68,6 +68,28 @@ const test3 = new Test3(); // example, example2, example3
 console.log(test.example === test2.example); // true
 console.log(test.example2 === test2.example2); // false
 console.log(test.example2 === test3.example2); // true
+
+// override
+
+class Original {
+  name = 'original';
+}
+
+class Override extends Original {
+  name = 'override';
+}
+
+class TestOverride {
+  @Inject(Original) test!: Original;
+
+  constructor() {
+    DIContainer.bind(Original, Override);
+
+    console.log(this.test.name);
+  }
+}
+
+new TestOverride(); // override
 ```
 
 ### license

@@ -100,3 +100,28 @@ const test3 = new Test3(); // example, example2, example3
 console.log(test.example === test2.example); // true
 console.log(test.example2 === test2.example2); // false
 console.log(test.example2 === test3.example2); // true
+// override
+class Original {
+  constructor() {
+    this.name = 'original';
+  }
+}
+class Override extends Original {
+  constructor() {
+    super(...arguments);
+    this.name = 'override';
+  }
+}
+class TestOverride {
+  constructor() {
+    _1.DIContainer.bind(Original, Override);
+    console.log(this.test.name);
+  }
+}
+__decorate(
+  [(0, _1.Inject)(Original), __metadata('design:type', Original)],
+  TestOverride.prototype,
+  'test',
+  void 0
+);
+new TestOverride(); // override

@@ -1,30 +1,61 @@
+export type Props = any;
+
+export type PropsKey = string;
+
+export type ClassName = string;
+
 export type BaseObject = {
-  constructor: { name: string };
+  constructor: { name: ClassName };
 };
 
-export type BaseClass<T = BaseObject> = new (...args: any[]) => T;
+export type BaseClass<T = BaseObject> = new (...args: Props[]) => T;
+
+export type InstancesPerProps = Record<PropsKey, BaseObject>;
 
 export class DIContainer {
-  protected static instances = new Map<string, unknown>();
+  protected static classes: Record<ClassName, BaseClass> = {};
+  protected static overrides: Record<ClassName, BaseClass> = {};
+  protected static instances: Record<ClassName, InstancesPerProps> = {};
 
-  static get<T extends BaseObject>(Class: BaseClass<T>, props?: any): T {
-    const classPropsKey = DIContainer.createKey(Class, props);
+  static get<T extends BaseObject>(Class: BaseClass<T>, props?: Props): T {
+    const propertyKey = DIContainer.createPropertyKey(Class, props);
 
-    if (!DIContainer.instances.has(classPropsKey)) {
-      DIContainer.instances.set(classPropsKey, new Class(props));
+    if (!DIContainer.instances[Class.name]) {
+      DIContainer.instances[Class.name] = {};
     }
 
-    return DIContainer.instances.get(classPropsKey) as T;
+    if (!DIContainer.instances[Class.name][propertyKey]) {
+      const ResolvedClass = DIContainer.resolveClass(Class);
+
+      DIContainer.instances[Class.name][propertyKey] = new ResolvedClass(props);
+    }
+
+    return DIContainer.instances[Class.name][propertyKey] as T;
   }
 
-  protected static createKey<T extends BaseObject>(
+  static bind<T extends BaseObject>(
+    Target: BaseClass<T>,
+    Source: BaseClass<T>
+  ): void {
+    DIContainer.overrides[Target.name] = Source;
+  }
+
+  protected static resolveClass<T extends BaseObject>(
+    Class: BaseClass<T>
+  ): BaseClass<T> {
+    const overwrite = this.overrides[Class.name];
+
+    return (overwrite || Class) as BaseClass<T>;
+  }
+
+  protected static createPropertyKey<T extends BaseObject>(
     Class: BaseClass<T>,
-    props?: any
-  ): string {
-    return `${Class.name}(${typeof props}:${DIContainer.tryStringify(props)})`;
+    props?: Props
+  ): PropsKey {
+    return `${typeof props}:${DIContainer.tryStringify(props)}`;
   }
 
-  protected static tryStringify(props?: any): string {
+  protected static tryStringify(props?: Props): string {
     try {
       return JSON.stringify(props);
     } catch (_err) {
@@ -34,7 +65,7 @@ export class DIContainer {
 }
 
 export function Inject<T extends BaseObject>(Class: BaseClass<T>, props?: any) {
-  return function (parent: Record<string, any>, propertyKey: string) {
+  return function (parent: Record<string, Props>, propertyKey: string) {
     Object.defineProperty(parent, propertyKey, {
       get: () => DIContainer.get(Class, props)
     });

@@ -4,14 +4,25 @@ exports.DIContainer = void 0;
 exports.Inject = Inject;
 class DIContainer {
   static get(Class, props) {
-    const classPropsKey = DIContainer.createKey(Class, props);
-    if (!DIContainer.instances.has(classPropsKey)) {
-      DIContainer.instances.set(classPropsKey, new Class(props));
+    const propertyKey = DIContainer.createPropertyKey(Class, props);
+    if (!DIContainer.instances[Class.name]) {
+      DIContainer.instances[Class.name] = {};
     }
-    return DIContainer.instances.get(classPropsKey);
+    if (!DIContainer.instances[Class.name][propertyKey]) {
+      const ResolvedClass = DIContainer.resolveClass(Class);
+      DIContainer.instances[Class.name][propertyKey] = new ResolvedClass(props);
+    }
+    return DIContainer.instances[Class.name][propertyKey];
   }
-  static createKey(Class, props) {
-    return `${Class.name}(${typeof props}:${DIContainer.tryStringify(props)})`;
+  static bind(Target, Source) {
+    DIContainer.overrides[Target.name] = Source;
+  }
+  static resolveClass(Class) {
+    const overwrite = this.overrides[Class.name];
+    return overwrite || Class;
+  }
+  static createPropertyKey(Class, props) {
+    return `${typeof props}:${DIContainer.tryStringify(props)}`;
   }
   static tryStringify(props) {
     try {
@@ -22,7 +33,9 @@ class DIContainer {
   }
 }
 exports.DIContainer = DIContainer;
-DIContainer.instances = new Map();
+DIContainer.classes = {};
+DIContainer.overrides = {};
+DIContainer.instances = {};
 function Inject(Class, props) {
   return function (parent, propertyKey) {
     Object.defineProperty(parent, propertyKey, {
