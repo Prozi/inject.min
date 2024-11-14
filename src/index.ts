@@ -13,7 +13,6 @@ export type BaseClass<T = BaseObject> = new (...args: Props[]) => T;
 export type InstancesPerProps = Record<PropsKey, BaseObject>;
 
 export class DIContainer {
-  protected static classes: Record<ClassName, BaseClass> = {};
   protected static overrides: Record<ClassName, BaseClass> = {};
   protected static instances: Record<ClassName, InstancesPerProps> = {};
 

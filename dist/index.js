@@ -33,7 +33,6 @@ class DIContainer {
   }
 }
 exports.DIContainer = DIContainer;
-DIContainer.classes = {};
 DIContainer.overrides = {};
 DIContainer.instances = {};
 function Inject(Class, props) {
