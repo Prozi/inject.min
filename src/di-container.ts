@@ -32,7 +32,9 @@ export class DIContainer {
     if (!DIContainer.instances[Class.name][propertyKey]) {
       const ResolvedClass = DIContainer.getClass(Class);
 
-      DIContainer.instances[Class.name][propertyKey] = new ResolvedClass(props);
+      DIContainer.instances[Class.name][propertyKey] = new ResolvedClass(
+        ...props
+      );
     }
 
     return DIContainer.instances[Class.name][propertyKey] as T;
