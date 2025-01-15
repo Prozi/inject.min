@@ -34,8 +34,6 @@ class TestOverride {
 
     console.log(instance.name); // 'override'
     console.log(Class === Override); // true
-
-    this.test = instance;
   }
 }
 
@@ -110,7 +108,7 @@ console.log(test.example2 === test3.example2); // true
 
 ### api
 
-https://prozi.github.io/inject.min/
+[DIContainer Documentation](https://prozi.github.io/inject.min/classes/DIContainer.html)
 
 ### install
 

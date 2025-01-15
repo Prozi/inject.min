@@ -1,6 +1,6 @@
 {
   "name": "inject.min",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "lightweight typescript dependency injection in 2024",
   "keywords": [
     "typescript",

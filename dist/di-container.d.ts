@@ -1,4 +1,4 @@
-import { Arg, BaseClass, BaseObject } from './types';
+import { BaseClass, BaseObject } from './types';
 export declare class DIContainer {
   protected static overrides: Record<string, BaseClass>;
   protected static instances: Record<string, Record<string, BaseObject>>;
@@ -17,7 +17,7 @@ export declare class DIContainer {
    * @param props the optional props for constructor of instance
    * @returns {instanceof Class}
    */
-  static get<T extends BaseObject>(Class: BaseClass<T>, ...props: Arg[]): T;
+  static get<T extends BaseObject>(Class: BaseClass<T>, ...props: any[]): T;
   /**
    * get the Class/Override that was used with bind
    * @param Class the class to search for in DIContainer
@@ -34,11 +34,11 @@ export declare class DIContainer {
    * @param props anything really
    * @returns {string}
    */
-  protected static createPropertyKey(props?: Arg): string;
+  protected static createPropertyKey(props?: any): string;
   /**
    * stringify anything or return {} if not possible
    * @param props anything really
    * @returns {string}
    */
-  protected static tryStringify(props?: Arg): string;
+  protected static tryStringify(props?: any): string;
 }

@@ -1,4 +1,4 @@
-import { Arg, BaseClass, BaseObject } from './types';
+import { BaseClass, BaseObject } from './types';
 
 export class DIContainer {
   protected static overrides: Record<string, BaseClass> = {};
@@ -22,7 +22,7 @@ export class DIContainer {
    * @param props the optional props for constructor of instance
    * @returns {instanceof Class}
    */
-  static get<T extends BaseObject>(Class: BaseClass<T>, ...props: Arg[]): T {
+  static get<T extends BaseObject>(Class: BaseClass<T>, ...props: any[]): T {
     const propertyKey = DIContainer.createPropertyKey(props);
 
     if (!DIContainer.instances[Class.name]) {
@@ -64,7 +64,7 @@ export class DIContainer {
    * @param props anything really
    * @returns {string}
    */
-  protected static createPropertyKey(props?: Arg): string {
+  protected static createPropertyKey(props?: any): string {
     if (typeof props !== 'undefined') {
       return DIContainer.tryStringify(props);
     }
@@ -77,7 +77,7 @@ export class DIContainer {
    * @param props anything really
    * @returns {string}
    */
-  protected static tryStringify(props?: Arg): string {
+  protected static tryStringify(props?: any): string {
     try {
       return JSON.stringify(props);
     } catch (_err) {
