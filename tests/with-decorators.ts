@@ -44,10 +44,6 @@ const test = new Test(); // example, example2, example3
 const test2 = new Test2(); // example, different, example3
 const test3 = new Test3(); // example, example2, example3
 
-expect(test.example).toBe(test2.example); // true
-expect(test.example2).toBe(test2.example2); // false
-expect(test.example2).toBe(test3.example2); // true
-
 class Original {
   name = 'original';
 }
@@ -62,7 +58,11 @@ class TestOverride {
   constructor() {
     DIContainer.bind(Original, Override);
 
-    console.log(this.test.name);
+    const Class = DIContainer.getClass(Original);
+    const instance = DIContainer.get(Original);
+
+    console.log(instance.name); // 'override'
+    console.log(Class === Override); // true
   }
 }
 

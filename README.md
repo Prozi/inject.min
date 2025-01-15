@@ -26,13 +26,16 @@ class TestOverride {
   constructor() {
     DIContainer.bind(Original, Override);
 
-    this.test = DIContainer.get(Original);
+    const Class = DIContainer.getClass(Original);
+    const instance = DIContainer.get(Original);
 
-    console.log(this.test.name); // 'override'
+    console.log(instance.name); // 'override'
+    console.log(Class === Override); // true
+
+    this.test = instance;
   }
 }
 
-// console.log('override')
 new TestOverride();
 ```
 

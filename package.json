@@ -1,6 +1,6 @@
 {
   "name": "inject.min",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "lightweight typescript dependency injection in 2024",
   "keywords": [
     "typescript",
@@ -41,6 +41,7 @@
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "test": "yarn jest --verbose",
+    "test-ts": "ts-node tests/with-decorators.ts",
     "precommit": "yarn build && yarn format",
     "amend": "yarn precommit && git commit -a --am --no-edit"
   },

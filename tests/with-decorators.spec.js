@@ -19,7 +19,9 @@ describe('GIVEN @Inject decorator', () => {
       'example3',
       'example',
       'example2',
-      'example3'
+      'example3',
+      'override',
+      'true'
     ]);
   });
 });
