@@ -32,7 +32,7 @@ export class DIContainer {
     }
 
     if (!DIContainer.instances[Class.name][propertyKey]) {
-      const ResolvedClass = DIContainer.resolveClass(Class);
+      const ResolvedClass = DIContainer.getClass(Class);
 
       DIContainer.instances[Class.name][propertyKey] = new ResolvedClass(props);
     }
@@ -40,19 +40,19 @@ export class DIContainer {
     return DIContainer.instances[Class.name][propertyKey] as T;
   }
 
-  static bind<T extends BaseObject>(
-    Original: BaseClass<T>,
-    Override: BaseClass<T>
-  ): void {
-    DIContainer.overrides[Original.name] = Override;
-  }
-
-  protected static resolveClass<T extends BaseObject>(
+  static getClass<T extends BaseObject>(
     Class: BaseClass<T>
   ): BaseClass<T> {
     const overwrite = this.overrides[Class.name];
 
     return (overwrite || Class) as BaseClass<T>;
+  }
+
+  static bind<T extends BaseObject>(
+    Original: BaseClass<T>,
+    Override: BaseClass<T>
+  ): void {
+    DIContainer.overrides[Original.name] = Override;
   }
 
   protected static createPropertyKey(props?: Props): PropsKey {
