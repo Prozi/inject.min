@@ -1,6 +1,6 @@
 {
   "name": "inject.min",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "lightweight typescript dependency injection in 2024",
   "keywords": [
     "typescript",
@@ -50,7 +50,7 @@
     "amend": "yarn precommit && git commit -a --am --no-edit"
   },
   "files": [
-    "src/index.*",
-    "dist/index.*"
+    "src/*.*",
+    "dist/*.*"
   ]
 }
