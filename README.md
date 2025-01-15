@@ -1,10 +1,42 @@
 # inject.min
 
-### install
+### disclaimer
 
-```bash
-npm i inject.min --save
+super easy and super small dependency injection - all that you need
+
+- no need to register
+- can override
+- can use inject
+- can use decorators
+
+### example without decorators
+
+```ts
+import { DIContainer } from 'inject.min';
+
+class Original {
+  name = 'original';
+}
+
+class Override extends Original {
+  name = 'override';
+}
+
+class TestOverride {
+  constructor() {
+    DIContainer.bind(Original, Override);
+
+    this.test = DIContainer.get(Original);
+
+    console.log(this.test.name); // 'override'
+  }
+}
+
+// console.log('override')
+new TestOverride();
 ```
+
+### to use decorators (optional)
 
 modify your `tsconfig.json`
 
@@ -16,10 +48,10 @@ modify your `tsconfig.json`
 }
 ```
 
-### example
+### example using decorators
 
 ```ts
-import { DIContainer, Inject } from 'inject.min';
+import { Inject } from 'inject.min';
 
 class Example {
   value: string;
@@ -36,9 +68,9 @@ class Example2 extends Example {
 }
 
 class Test {
-  @Inject(Example) example!: Example;
-  @Inject(Example2, 'example2') example2!: Example2;
-  @Inject(Example, { param: 'example3' }) example3!: Example;
+  @Inject(Example) example: Example;
+  @Inject(Example2, 'example2') example2: Example2;
+  @Inject(Example, { param: 'example3' }) example3: Example;
 
   constructor() {
     console.log(this.example.value); // example
@@ -48,9 +80,9 @@ class Test {
 }
 
 class Test2 {
-  @Inject(Example) example!: Example;
-  @Inject(Example2, 'different') example2!: Example2;
-  @Inject(Example, { param: 'example3' }) example3!: Example;
+  @Inject(Example) example: Example;
+  @Inject(Example2, 'different') example2: Example2;
+  @Inject(Example, { param: 'example3' }) example3: Example;
 
   constructor() {
     console.log(this.example.value); // example
@@ -68,28 +100,12 @@ const test3 = new Test3(); // example, example2, example3
 console.log(test.example === test2.example); // true
 console.log(test.example2 === test2.example2); // false
 console.log(test.example2 === test3.example2); // true
+```
 
-// override
+### install
 
-class Original {
-  name = 'original';
-}
-
-class Override extends Original {
-  name = 'override';
-}
-
-class TestOverride {
-  @Inject(Original) test!: Original;
-
-  constructor() {
-    DIContainer.bind(Original, Override);
-
-    console.log(this.test.name);
-  }
-}
-
-new TestOverride(); // override
+```bash
+npm i inject.min --save
 ```
 
 ### license

@@ -6,6 +6,13 @@ export type BaseObject = {
     name: ClassName;
   };
 };
+export type PropertyKey =
+  | any
+  | {
+      name: string;
+      private: boolean;
+      static: boolean;
+    };
 export type BaseClass<T = BaseObject> = new (...args: Props[]) => T;
 export type InstancesPerProps = Record<PropsKey, BaseObject>;
 export declare class DIContainer {
@@ -13,19 +20,16 @@ export declare class DIContainer {
   protected static instances: Record<ClassName, InstancesPerProps>;
   static get<T extends BaseObject>(Class: BaseClass<T>, props?: Props): T;
   static bind<T extends BaseObject>(
-    Target: BaseClass<T>,
-    Source: BaseClass<T>
+    Original: BaseClass<T>,
+    Override: BaseClass<T>
   ): void;
   protected static resolveClass<T extends BaseObject>(
     Class: BaseClass<T>
   ): BaseClass<T>;
-  protected static createPropertyKey<T extends BaseObject>(
-    Class: BaseClass<T>,
-    props?: Props
-  ): PropsKey;
+  protected static createPropertyKey(props?: Props): PropsKey;
   protected static tryStringify(props?: Props): string;
 }
 export declare function Inject<T extends BaseObject>(
   Class: BaseClass<T>,
   props?: any
-): (parent: Record<string, Props>, propertyKey: string) => void;
+): (target: any, propertyKey: any) => void;

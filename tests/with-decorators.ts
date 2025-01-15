@@ -1,7 +1,7 @@
-import { DIContainer, Inject } from '.';
+import { Inject, DIContainer } from '../src';
 
 class Example {
-  value: string;
+  value!: string;
 
   constructor(props?: { param: string }) {
     this.value = props?.param || 'example';
@@ -44,11 +44,9 @@ const test = new Test(); // example, example2, example3
 const test2 = new Test2(); // example, different, example3
 const test3 = new Test3(); // example, example2, example3
 
-console.log(test.example === test2.example); // true
-console.log(test.example2 === test2.example2); // false
-console.log(test.example2 === test3.example2); // true
-
-// override
+expect(test.example).toBe(test2.example); // true
+expect(test.example2).toBe(test2.example2); // false
+expect(test.example2).toBe(test3.example2); // true
 
 class Original {
   name = 'original';
@@ -68,4 +66,4 @@ class TestOverride {
   }
 }
 
-new TestOverride(); // override
+new TestOverride();

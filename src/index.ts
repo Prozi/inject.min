@@ -8,6 +8,14 @@ export type BaseObject = {
   constructor: { name: ClassName };
 };
 
+export type PropertyKey =
+  | any
+  | {
+      name: string;
+      private: boolean;
+      static: boolean;
+    };
+
 export type BaseClass<T = BaseObject> = new (...args: Props[]) => T;
 
 export type InstancesPerProps = Record<PropsKey, BaseObject>;
@@ -17,7 +25,7 @@ export class DIContainer {
   protected static instances: Record<ClassName, InstancesPerProps> = {};
 
   static get<T extends BaseObject>(Class: BaseClass<T>, props?: Props): T {
-    const propertyKey = DIContainer.createPropertyKey(Class, props);
+    const propertyKey = DIContainer.createPropertyKey(props);
 
     if (!DIContainer.instances[Class.name]) {
       DIContainer.instances[Class.name] = {};
@@ -33,10 +41,10 @@ export class DIContainer {
   }
 
   static bind<T extends BaseObject>(
-    Target: BaseClass<T>,
-    Source: BaseClass<T>
+    Original: BaseClass<T>,
+    Override: BaseClass<T>
   ): void {
-    DIContainer.overrides[Target.name] = Source;
+    DIContainer.overrides[Original.name] = Override;
   }
 
   protected static resolveClass<T extends BaseObject>(
@@ -47,10 +55,7 @@ export class DIContainer {
     return (overwrite || Class) as BaseClass<T>;
   }
 
-  protected static createPropertyKey<T extends BaseObject>(
-    Class: BaseClass<T>,
-    props?: Props
-  ): PropsKey {
+  protected static createPropertyKey(props?: Props): PropsKey {
     return `${typeof props}:${DIContainer.tryStringify(props)}`;
   }
 
@@ -64,9 +69,11 @@ export class DIContainer {
 }
 
 export function Inject<T extends BaseObject>(Class: BaseClass<T>, props?: any) {
-  return function (parent: Record<string, Props>, propertyKey: string) {
-    Object.defineProperty(parent, propertyKey, {
-      get: () => DIContainer.get(Class, props)
+  return function (target: any, propertyKey: any) {
+    Object.defineProperty(target, propertyKey, {
+      get: () => DIContainer.get(Class, props),
+      enumerable: true,
+      configurable: true
     });
   };
 }
