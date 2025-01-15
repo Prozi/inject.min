@@ -13,7 +13,7 @@ describe('GIVEN DIContainer', () => {
     expect(instance.value.whatever).toBe('foo');
   });
 
-  it('THEN bind(Original, Override) work', () => {
+  describe('WHEN bind(Original, Override)', () => {
     class Original {
       value = {
         key: 'this is a base value'
@@ -28,8 +28,16 @@ describe('GIVEN DIContainer', () => {
 
     DIContainer.bind(Original, Override);
 
-    const instance = DIContainer.get(Original);
+    it('THEN bind() does work', () => {
+      const instance = DIContainer.get(Original);
 
-    expect(instance.value.key).not.toBe('this is a base value');
+      expect(instance.value.key).not.toBe('this is a base value');
+    });
+
+    it('AND getClass(Original) === Override work', () => {
+      const Class = DIContainer.getClass(Original);
+
+      expect(Class).toBe(Override);
+    });
   });
 });
