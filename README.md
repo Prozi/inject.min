@@ -1,5 +1,8 @@
 # inject.min
 
+[<img src="https://img.shields.io/npm/v/inject.min?style=for-the-badge&color=success" alt="npm version" />](https://www.npmjs.com/package/inject.min?activeTab=versions)
+[<img src="https://img.shields.io/circleci/build/github/Prozi/inject.min/master?style=for-the-badge" alt="build status" />](https://app.circleci.com/pipelines/github/Prozi/inject.min)
+
 ### disclaimer
 
 super easy and super small dependency injection - all that you need
@@ -104,6 +107,10 @@ console.log(test.example === test2.example); // true
 console.log(test.example2 === test2.example2); // false
 console.log(test.example2 === test3.example2); // true
 ```
+
+### api
+
+https://prozi.github.io/inject.min/
 
 ### install
 
