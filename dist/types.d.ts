@@ -1,17 +1,7 @@
-export type Props = any;
-export type PropsKey = string;
-export type ClassName = string;
+export type Arg = any;
 export type BaseObject = {
   constructor: {
-    name: ClassName;
+    name: string;
   };
 };
-export type PropertyKey =
-  | any
-  | {
-      name: string;
-      private: boolean;
-      static: boolean;
-    };
-export type BaseClass<T = BaseObject> = new (...args: Props[]) => T;
-export type InstancesPerProps = Record<PropsKey, BaseObject>;
+export type BaseClass<T = BaseObject> = new (...args: Arg[]) => T;

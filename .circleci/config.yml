@@ -1,0 +1,20 @@
+jobs:
+  build:
+    docker:
+      - image: cimg/node:lts
+
+    steps:
+      # make cache folder (if missing) and take ownership
+      - run: sudo mkdir -p /usr/local/n
+      - run: sudo chown -R $(whoami) /usr/local/n
+      # take ownership of node install destination folders
+      - run: sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+      # verify
+      - run: node --version
+      - run: npm --version
+      - run: yarn --version
+      # test
+      - checkout
+      - run: yarn
+      - run: yarn build
+      - run: yarn test

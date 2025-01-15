@@ -32,3 +32,4 @@ var __exportStar =
 Object.defineProperty(exports, '__esModule', { value: true });
 __exportStar(require('./di-container'), exports);
 __exportStar(require('./inject-decorator'), exports);
+__exportStar(require('./types'), exports);
