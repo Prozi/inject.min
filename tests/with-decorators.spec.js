@@ -8,7 +8,9 @@ describe('GIVEN @Inject decorator', () => {
       encoding: 'utf-8'
     });
 
-    const result = lines.split('\n').filter(Boolean);
+    const result = JSON.parse(
+      JSON.stringify(lines.split('\n').filter(Boolean))
+    );
 
     expect(result).toStrictEqual([
       'example',

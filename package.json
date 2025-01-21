@@ -1,11 +1,13 @@
 {
   "name": "inject.min",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "lightweight typescript dependency injection in 2024",
   "keywords": [
     "typescript",
+    "javascript",
     "dependency injection",
     "di",
+    "inject",
     "injectable",
     "decorators",
     "inversion of control",
@@ -14,11 +16,9 @@
     "zero dependency",
     "typescript library",
     "typescript di",
-    "mit",
     "dependency management",
     "override",
-    "bind",
-    "register"
+    "bind"
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,7 +36,7 @@
     "prettier": "^3.4.2",
     "ts-node": "^10.9.2",
     "typedoc": "^0.27.6",
-    "typescript": "~5.6.3"
+    "typescript": "^5.7.3"
   },
   "scripts": {
     "format": "prettier . --write",
