@@ -1,7 +1,7 @@
 # inject.min
 
 [<img src="https://img.shields.io/npm/v/inject.min?style=for-the-badge&color=success" alt="npm version" />](https://www.npmjs.com/package/inject.min?activeTab=versions)
-[<img src="https://img.shields.io/circleci/build/github/Prozi/inject.min/master?style=for-the-badge" alt="build status" />](https://app.circleci.com/pipelines/github/Prozi/inject.min)
+[<img src="https://img.shields.io/circleci/build/github/Prozi/inject.min/main?style=for-the-badge" alt="build status" />](https://app.circleci.com/pipelines/github/Prozi/inject.min)
 
 ### disclaimer
 
